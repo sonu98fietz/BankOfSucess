@@ -1,0 +1,4 @@
+
+enum transferMode {
+IMPS,NEFT
+}
