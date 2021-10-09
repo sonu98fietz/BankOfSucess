@@ -1,3 +1,4 @@
+package Level_1_and_2;
 import java.time.LocalDate;
 
 public class Savings extends Account {
@@ -32,16 +33,17 @@ public class Savings extends Account {
 		}
 		boolean isValid= false;
 		try {
-			isValid = checkAgeValidity(this.Date0fBirth);
+			isValid = checkAgeValidity(getDate0fBirth());
 			isOpened = true;
 		}catch(AgeValidityException ex) {
+			System.out.println(ex.getMessage());
 			isOpened =false;
 		}
+		
 		isOpened = activateAccount(isValid);
+		
 		return isOpened;
 	}
-	
-	
 	public boolean activateAccount(boolean isOpened) {
 		if(isOpened) {
 			this.setActive(isOpened);
@@ -51,14 +53,10 @@ public class Savings extends Account {
 		return isOpened;
 	}
 	public boolean checkAgeValidity(LocalDate date0fBirth) throws AgeValidityException{
-		boolean isValidAge = false;
+		boolean isValidAge = true;	
 		if(LocalDate.now().getYear()-date0fBirth.getYear()<18) {
-			isValidAge= true;
 			throw new AgeValidityException("Age is less than 18");
 		}
 		return isValidAge;
-	}
-	
-
-	
+	}	
 }

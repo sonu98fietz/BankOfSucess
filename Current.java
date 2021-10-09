@@ -1,10 +1,11 @@
+package Level_1_and_2;
 import java.time.LocalDate;
 
 public class Current extends Account {
 
 	private String companyName;
 	private String website;
-	private int regNum;
+	private String regNum;
 	
 	
 	public String getCompanyName() {
@@ -19,23 +20,24 @@ public class Current extends Account {
 	public void setWebsite(String website) {
 		this.website = website;
 	}
-	public int getRegNum() {
+	public String getRegNum() {
 		return regNum;
 	}
-	public void setRegNum(int regNum) {
+	public void setRegNum(String regNum) {
 		this.regNum = regNum;
 	}
 	
 	public boolean open() throws AccountAlreadyActiveException {
 		boolean isOpened = false;
 		if(this.isActive()) {
-			throw new AccountAlreadyActiveException("Account is Alraedy Active");
+			throw new AccountAlreadyActiveException("Account is Already Active");
 		}
 		boolean isValid= false;
 		try {
-			isValid = checkRegistrationNumberValidity(this.getRegNum());
+			isValid = checkRegistrationNumberValidity(getRegNum());
 			isOpened = true;
 		}catch(RegistrationNumberValidityException ex) {
+			System.out.println(ex.getMessage());
 			isOpened =false;
 		}
 		isOpened = activateAccount(isValid);
@@ -50,10 +52,9 @@ public class Current extends Account {
 		}
 		return isActivated;
 	}
-	private boolean checkRegistrationNumberValidity(int regnum) throws RegistrationNumberValidityException{
+	private boolean checkRegistrationNumberValidity(String regnum) throws RegistrationNumberValidityException{
 		boolean isValidAge = true;
-		if(regnum == 0) {
-			isValidAge= false;
+		if(regnum.isEmpty()) {
 			throw new RegistrationNumberValidityException("Registration Number is not valid");
 		}
 		return isValidAge;

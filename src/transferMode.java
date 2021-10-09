@@ -1,4 +1,0 @@
-
-enum transferMode {
-IMPS,NEFT
-}
